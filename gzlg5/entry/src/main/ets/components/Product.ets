@@ -1,7 +1,13 @@
 @Component
 export struct Product{
   //@Prop: 子组件接收父组件的数据
-  @Prop pro: Object = Object({})
+  @Prop pro: Object = Object({
+    smallImg: 'http://127.0.0.1:7001/assets/56f6a7360-caa4-11f0-a4d8-4d82b2539fe6.jpeg',
+    name :'连衣裙两件套通勤套装',
+    enname:'Two-Piece Dress Set for Work',
+    price: '269.00',
+    flag: '潮牌'
+  })
 
   build() {
     Column(){
@@ -9,47 +15,26 @@ export struct Product{
         .width('100%')  //图片占满卡片宽度
         .height('80%')   //固定图片高度
         .borderRadius(8) //图片圆角
-      Row() {
-        Column() {
-          Text(Object(this.pro).name)
-            .maxLines(2) // 防止文本过长溢出
-            .textOverflow({overflow: TextOverflow.Ellipsis})
-            .fontSize(13)
-            .fontColor('#333')
 
-        }
-        .margin({left: 2})
-        .alignItems(HorizontalAlign.Start)
-        .width('65%')
+      Text(Object(this.pro).name)
+        .maxLines(1) // 防止文本过长溢出
+        .textOverflow({overflow: TextOverflow.Ellipsis})
+        .fontSize(13)
+        .fontColor('#333')
 
-        Column() {
-          //价格文本
-          Text(`￥${Object(this.pro).price}`)
-            .fontSize(18)
-            .fontColor('#ff4400')
-            .textAlign(TextAlign.End)
-        }
+      Text(Object(this.pro).enname)
+        .maxLines(1) // 防止文本过长溢出
+        .textOverflow({overflow: TextOverflow.Ellipsis})
+        .fontSize(13)
+        .fontColor('#333')
+      //价格文本
+      Text(`￥${Object(this.pro).price}`)
+        .fontSize(18)
+        .fontColor('#ff4400')
+        .textAlign(TextAlign.End)
 
-      }
-      .margin({top: 5})
-      .width('80%')
 
-      Row() {
-        Column() {
-          Text(Object(this.pro).enname)
-            .maxLines(1) // 防止文本过长溢出
-            .textOverflow({overflow: TextOverflow.Ellipsis})
-            .fontSize(13)
-            .fontColor('#333')
 
-        }
-        .margin({left: 2})
-        .alignItems(HorizontalAlign.Start)
-        .width('90%')
-
-      }
-      .margin({top: 5})
-      .width('80%')
 
       if(Object(this.pro).flag){
         Text(Object(this.pro).flag)

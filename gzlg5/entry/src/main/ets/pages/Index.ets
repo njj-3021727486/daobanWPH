@@ -1,5 +1,5 @@
 import {HomePage} from '../view/HomePage'
-import {MenuPage} from '../view/MenuPage'
+import {StorePage} from '../view/StorePage'
 import {PackagePage} from '../view/PackagePage'
 import {MyPage} from '../view/MyPage'
 
@@ -25,9 +25,9 @@ struct Index {
       title: '首页'
     },
     {
-    inactiveIcon: $r('app.media.menuD'),
-      activeIcon: $r('app.media.menu'),
-    title: '收藏'
+    inactiveIcon: $r('app.media.storeD'),
+      activeIcon: $r('app.media.store'),
+    title: '商城'
   },
     {
       inactiveIcon: $r('app.media.packageD'),
@@ -42,7 +42,7 @@ struct Index {
   ]
 
   //定义选中tabbar的下标
-  @State selectedIndexindex: number = 0;
+  @State selectedIndexindex: number = 1;
   //定义函数内部的组件
   @Builder
   TabBarItem(item: TabbarDataItem , index:number){
@@ -64,13 +64,13 @@ struct Index {
       Tabs(){
         ForEach(this.tabbarData,(item: TabbarDataItem,index: number)=>{
           TabContent(){
-            if(index==0){
+            if(this.selectedIndexindex==0){
               HomePage()
             }
-            else if(index==1){
-              MenuPage()
+            else if(this.selectedIndexindex==1){
+              StorePage()
             }
-            else if(index==2){
+            else if(this.selectedIndexindex==2){
               PackagePage()
             }
             else {
