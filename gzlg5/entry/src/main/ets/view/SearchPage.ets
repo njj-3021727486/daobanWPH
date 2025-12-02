@@ -31,13 +31,16 @@ export struct SearchPage {
     console.log('搜索历史 historyData',JSON.stringify(historyData));
 
     if(historyData){
+      // historyData=[];
+      // this.historyData = [];
       this.historyData = historyData;
     }
   }
 
   build() {
     // 根布局：垂直排列
-    Column() {
+    Scroll(){       ///没有实现滑动
+      Column() {
       // 顶部搜索栏：返回图标 + 搜索框 + 搜索按钮
       Row() {
         Column(){
@@ -177,7 +180,7 @@ export struct SearchPage {
         .margin({left:15})
 
       // 商品列表区域（自动换行布局）
-      Scroll(){       ///没有实现滑动
+
         Flex({wrap: FlexWrap.Wrap}) {
           ForEach(this.productData,(item: Object,index:number) => {
             Column(){
@@ -193,6 +196,7 @@ export struct SearchPage {
           })
         }
         .width('100%')
+        // .height('100%')
       }
     }
     .backgroundColor('#fff')

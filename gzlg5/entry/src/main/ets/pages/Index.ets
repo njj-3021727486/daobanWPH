@@ -1,6 +1,5 @@
 import {HomePage} from '../view/HomePage'
 import {StorePage} from '../view/StorePage'
-import {PackagePage} from '../view/PackagePage'
 import {SearchPage} from '../view/SearchPage'
 import {MyPage} from '../view/MyPage'
 
