@@ -3,6 +3,7 @@ import {getProductByFlags} from '../api/api'
 
 import { Product } from '../components/Product'
 import json from '@ohos.util.json'
+import { router } from '@kit.ArkUI'
 
 
 @Component
@@ -80,6 +81,12 @@ export  struct HomePage{
               .borderRadius(10)
               .placeholderColor('#99CCCC')
               .height(38)
+              .onClick(()=>{
+                console.log('点击搜索框，开始跳转');
+                // router.pushUrl({
+                //   url:'view/SearchPage'
+                // })
+              })
           }
           .alignItems(HorizontalAlign.Start)
           .backgroundColor('#fff')
@@ -104,47 +111,47 @@ export  struct HomePage{
         .width('100%')
 
         //商品标识列表（4个）
-      Row(){
-        Row(){
-          ForEach(this.flags,(item: string, index: number)=>{
-            Column(){
-              Text(item)
-                .width(60)
+          Row(){
+            Row(){
+              ForEach(this.flags,(item: string, index: number)=>{
+                Column(){
+                  Text(item)
+                    .width(60)
+                    .height(60)
+                    .backgroundColor(this.selectFlagIndex==index?'#19aba8':'#f2f2f2')
+                    .fontColor(this.selectFlagIndex==index?'#fff':'#ff2e817e')
+                    .textAlign(TextAlign.Center)
+                    .borderRadius(30)
+                    .onClick((): void =>{
+                      //如果当前选项再次被点击，没有出现选项切换时，直接return，不需要重新渲染
+                      if(this.selectFlagIndex==index){
+                        return;
+                      }
+                      console.log('index ==>',index);
+                      this.selectFlagIndex = index;
+                      let currentFlag: string = this.flags[this.selectFlagIndex];
+                      let currentFlagProduct: Object[] = [];
+
+                      this.allProductData.forEach((item: Object) =>{
+                        if(Object(item).flag == currentFlag){
+                          currentFlagProduct.push(item);
+                        }
+                      })
+                      this.currentProduct = currentFlagProduct;
+                      console.log("currentFlagProduct==>",JSON.stringify(this.currentProduct))
+                    })
+                }
+                .width('25%')
                 .height(60)
-                .backgroundColor(this.selectFlagIndex==index?'#19aba8':'#f2f2f2')
-                .fontColor(this.selectFlagIndex==index?'#fff':'#ff2e817e')
-                .textAlign(TextAlign.Center)
-                .borderRadius(30)
-                .onClick((): void =>{
-                  //如果当前选项再次被点击，没有出现选项切换时，直接return，不需要重新渲染
-                  if(this.selectFlagIndex==index){
-                    return;
-                  }
-                  console.log('index ==>',index);
-                  this.selectFlagIndex = index;
-                  let currentFlag: string = this.flags[this.selectFlagIndex];
-                  let currentFlagProduct: Object[] = [];
+              })
 
-                  this.allProductData.forEach((item: Object) =>{
-                    if(Object(item).flag == currentFlag){
-                      currentFlagProduct.push(item);
-                    }
-                  })
-                  this.currentProduct = currentFlagProduct;
-                  console.log("currentFlagProduct==>",JSON.stringify(this.currentProduct))
-                })
             }
-            .width('25%')
-            .height(60)
-          })
-
-        }
-        .backgroundColor('#fff')
-        .padding({top: 10,bottom: 10})
-        .borderRadius(10)
-      }
-      .width('100%')
-      .padding(10)
+            .backgroundColor('#fff')
+            .padding({top: 10,bottom: 10})
+            .borderRadius(10)
+          }
+          .width('100%')
+          .padding(10)
 
       //商品列表
       Flex({wrap: FlexWrap.Wrap}){

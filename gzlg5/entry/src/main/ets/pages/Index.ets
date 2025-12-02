@@ -1,6 +1,7 @@
 import {HomePage} from '../view/HomePage'
 import {StorePage} from '../view/StorePage'
 import {PackagePage} from '../view/PackagePage'
+import {SearchPage} from '../view/SearchPage'
 import {MyPage} from '../view/MyPage'
 
 //定义类型约束（interface）
@@ -42,7 +43,7 @@ struct Index {
   ]
 
   //定义选中tabbar的下标
-  @State selectedIndexindex: number = 1;
+  @State selectedIndexindex: number = 2;
   //定义函数内部的组件
   @Builder
   TabBarItem(item: TabbarDataItem , index:number){
@@ -71,7 +72,7 @@ struct Index {
               StorePage()
             }
             else if(this.selectedIndexindex==2){
-              PackagePage()
+              SearchPage()
             }
             else {
               MyPage()
