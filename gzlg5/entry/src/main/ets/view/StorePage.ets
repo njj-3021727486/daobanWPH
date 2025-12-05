@@ -2,8 +2,9 @@ import { Product } from "../components/Product"
 import {getProductType} from '../api/api'
 import {getProductByType} from '../api/api'
 
+
 // 导入路由模块（用于页面跳转）
-import router from '@kit.ArkUI';
+import { router } from '@kit.ArkUI'
 
 
 @Component
@@ -49,6 +50,23 @@ export  struct StorePage{
     console.log('ProductData==>',JSON.stringify(this.currentProduct))
   }
 
+  private viewProductDetail(pid: string){
+    console.log('pid',pid);
+    router.pushUrl({
+      url:'pages/DetailPage',
+      //参数
+      params: {
+        pid
+      }
+    })
+  }
+
+  private viewSearchPage(){
+    console.log('点击搜索框，开始跳转');
+    router.pushUrl({
+      url:'pages/SearchPage'
+    })
+  }
 
 
   build() {
@@ -61,6 +79,9 @@ export  struct StorePage{
           .borderRadius(10)
           .placeholderColor('#99CCCC')
           .height(38)
+          .onClick(()=>{
+            this.viewSearchPage()
+          })
       }
       .alignItems(HorizontalAlign.Start)
       .backgroundColor('#fff')
@@ -136,6 +157,9 @@ export  struct StorePage{
                   .backgroundColor('#fff')
                   .margin({right: (index%2==0)?10:0,bottom: 10})
                   .padding(5)                  // 内边距，避免内容贴边
+                  .onClick(()=>{
+                    this.viewProductDetail(Object(item).pid)
+                  })
                 })
               }
               .width('100%')

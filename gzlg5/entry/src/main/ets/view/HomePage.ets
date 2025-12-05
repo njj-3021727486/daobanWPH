@@ -1,8 +1,5 @@
-import { it } from '@ohos/hypium'
 import {getProductByFlags} from '../api/api'
-
 import { Product } from '../components/Product'
-import json from '@ohos.util.json'
 import { router } from '@kit.ArkUI'
 
 
@@ -20,6 +17,24 @@ export  struct HomePage{
   @State bannerData: Object[] = []
   //定义当前商品标记的商品数据
   @State currentProduct: Object[] = []
+
+  private viewSearchPage(){
+    console.log('点击搜索框，开始跳转');
+    router.pushUrl({
+      url:'pages/SearchPage'
+    })
+  }
+
+  private viewProductDetail(pid: string){
+    console.log('pid',pid);
+    router.pushUrl({
+      url:'pages/DetailPage',
+      //参数
+      params: {
+        pid
+      }
+    })
+  }
 
 
 
@@ -82,10 +97,7 @@ export  struct HomePage{
               .placeholderColor('#99CCCC')
               .height(38)
               .onClick(()=>{
-                console.log('点击搜索框，开始跳转');
-                // router.pushUrl({
-                //   url:'view/SearchPage'
-                // })
+                this.viewSearchPage()
               })
           }
           .alignItems(HorizontalAlign.Start)
@@ -99,6 +111,9 @@ export  struct HomePage{
                 Column(){
                   Image(Object(item).largeImg)
                     .width('100%')
+                    .onClick(()=>{
+                      this.viewProductDetail(Object(item).pid)
+                    })
                 }
                 .width('100%')
                 .background('#e1e3e2')
@@ -144,7 +159,6 @@ export  struct HomePage{
                 .width('25%')
                 .height(60)
               })
-
             }
             .backgroundColor('#fff')
             .padding({top: 10,bottom: 10})
@@ -166,6 +180,10 @@ export  struct HomePage{
               .backgroundColor('#fff')
               .margin({right: (index%2==0)?10:0,bottom: 10})
               .padding(5)                  // 内边距，避免内容贴边
+              .onClick(()=>{
+                this.viewProductDetail(Object(item).pid)
+
+              })
             })
 
       }

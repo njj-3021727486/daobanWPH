@@ -1,7 +1,7 @@
 import {HomePage} from '../view/HomePage'
 import {StorePage} from '../view/StorePage'
-import {SearchPage} from '../view/SearchPage'
 import {MyPage} from '../view/MyPage'
+import { PackagePage } from '../view/PackagePage'
 
 //定义类型约束（interface）
 
@@ -28,7 +28,7 @@ struct Index {
     inactiveIcon: $r('app.media.storeD'),
       activeIcon: $r('app.media.store'),
     title: '商城'
-  },
+    },
     {
       inactiveIcon: $r('app.media.packageD'),
       activeIcon: $r('app.media.package'),
@@ -42,7 +42,7 @@ struct Index {
   ]
 
   //定义选中tabbar的下标
-  @State selectedIndexindex: number = 2;
+  @State selectedIndexindex: number = 0;
   //定义函数内部的组件
   @Builder
   TabBarItem(item: TabbarDataItem , index:number){
@@ -71,7 +71,7 @@ struct Index {
               StorePage()
             }
             else if(this.selectedIndexindex==2){
-              SearchPage()
+              PackagePage()
             }
             else {
               MyPage()

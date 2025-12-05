@@ -66,3 +66,17 @@ export const searchProduct = async (name: string) => {
 
   })
 }
+
+
+export const getProductDetail = async (pid: string) => {
+  return await httpRequest.request(`${baseUrl}/productDetail`,{
+    //请求类型
+    method: http.RequestMethod.GET,
+    extraData:{
+      pid: pid
+    },
+    //设置相应数据类型
+    expectDataType: http.HttpDataType.OBJECT
+
+  })
+}
